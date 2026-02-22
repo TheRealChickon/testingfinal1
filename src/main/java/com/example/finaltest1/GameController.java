@@ -34,11 +34,12 @@ public class GameController {
 
     @GetMapping("/")
     public String showGame(Model model) {
-        // Fetch the score, defaulting to 0 if not found
-        int currentScore = repository.findById(1L).map(HighScore::getScore).orElse(0);
 
-        // Add it to the model so Thymeleaf can use ${highscore}
-        model.addAttribute("highscores", currentScore);
+        // int currentScore = repository.findById(1L).map(HighScore::getScore).orElse(0);
+
+        model.addAttribute("highscores", repository.findAll());
+
+        // model.addAttribute("highscores", currentScore);
         return "index";
     }
 }
