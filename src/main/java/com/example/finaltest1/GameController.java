@@ -18,7 +18,7 @@ public class GameController {
 
     @PostMapping("/score")
     @ResponseBody
-    public void saveHighScore(@RequestParam int newScore,@RequestParam String name) {
+    public HighScore saveHighScore(@RequestParam int newScore,@RequestParam String name) {
 
         HighScore h = repository.findByName(name).orElse(new HighScore());
 
@@ -28,7 +28,7 @@ public class GameController {
             h.setScore(newScore);
             repository.save(h);
         }
-
+        return h;
     }
 
     @GetMapping("/")
