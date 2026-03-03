@@ -24,7 +24,6 @@ public class GameController {
 
         h.setName(name);
 
-
         if (h.getName().equals(name) && newScore > h.getScore()) {
             h.setScore(newScore);
             repository.save(h);
