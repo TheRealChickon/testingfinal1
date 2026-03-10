@@ -36,7 +36,7 @@ public class GameController {
 
         // int currentScore = repository.findById(1L).map(HighScore::getScore).orElse(0);
 
-        model.addAttribute("highscores", repository.findAll());
+        model.addAttribute("highscores", repository.findTop6ByOrderByScoreDesc());
 
         // model.addAttribute("highscores", currentScore);
         return "index";
