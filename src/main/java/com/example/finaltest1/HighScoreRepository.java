@@ -12,7 +12,7 @@ public interface HighScoreRepository extends JpaRepository<HighScore, Long> {
 
     public Optional<HighScore> findByName(String name);
 
-    @Override
+    // @Override
     @Query("SELECT h FROM HighScore h ORDER BY h.score DESC")
     public List<HighScore> findAll();
 
