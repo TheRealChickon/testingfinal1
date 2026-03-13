@@ -13,6 +13,9 @@ import org.springframework.ui.Model;
 @Controller
 public class GameController {
 
+
+    //ToDo 1. Score 2. Zeit
+
     @Autowired
     private HighScoreRepository repository;
 
