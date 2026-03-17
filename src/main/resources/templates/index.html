@@ -75,8 +75,8 @@
 
 </div>
 
-<script th:inline="javascript">
 
+<script th:inline="javascript">
     let playerName = prompt("Enter your name:", "TheRealChicken");
     if (!playerName) playerName = "keine ahnung";
 
@@ -171,6 +171,7 @@
         return false;
     }
 
+    let startTime = Date.now();
     let game = setInterval(draw, 100);
 </script>
 

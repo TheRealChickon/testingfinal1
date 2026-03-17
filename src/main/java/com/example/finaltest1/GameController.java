@@ -18,13 +18,14 @@ public class GameController {
 
     @PostMapping("/score")
     @ResponseBody
-    public HighScore saveHighScore(@RequestParam int newScore,@RequestParam String name) {
+    public HighScore saveHighScore(@RequestParam int newScore,@RequestParam String name, @RequestParam int time) {
 
         HighScore h = repository.findByName(name).orElse(new HighScore());
 
         h.setName(name);
+        h.setTime(time);
 
-        if (h.getName().equals(name) && newScore > h.getScore()) {
+        if (h.getName().equals(name) && newScore > h.getScore() || h.getTime() < time && h.getName().equals(name)) {
             h.setScore(newScore);
             repository.save(h);
         }

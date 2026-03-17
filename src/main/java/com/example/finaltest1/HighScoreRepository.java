@@ -24,9 +24,12 @@ public interface HighScoreRepository extends JpaRepository<HighScore, Long> {
     @Override
     default List<HighScore> findAll() {
         return findAll(Sort.unsorted()).stream()
-                .sorted(Comparator.comparing(HighScore::getScore).reversed())
+                .sorted(Comparator.comparing(HighScore::getScore).reversed()
+                .thenComparing(HighScore::getTime))
                 .limit(6)
                 .toList();
     }
+
+
 
 }

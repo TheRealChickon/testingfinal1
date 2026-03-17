@@ -2,8 +2,6 @@ package com.example.finaltest1;
 
 import jakarta.persistence.*;
 
-import java.util.Optional;
-
 @Entity
 @Table(name = "high_score")
 public class HighScore {
@@ -13,12 +11,16 @@ public class HighScore {
     private Long id;
 
     private int score;
-
+    private int time;
     private String name;
+
 
     // Getters and Setters
     public String getName() {return name;}
     public void setName(String name) {this.name = name;}
+
+    public int getTime() { return time; }
+    public void setTime(int time) { this.time = time; }
 
 
     // public Long getId() { return id; }
