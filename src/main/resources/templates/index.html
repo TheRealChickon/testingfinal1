@@ -57,18 +57,16 @@
 
 <div class="game-container">
     <h1>Chicken Snake :D</h1>
-    <canvas id="gameCanvas" width="400" height="400"></canvas>
+    <canvas height="400" id="gameCanvas" width="400"></canvas>
     <div class="score-board">Corn Eaten: <span id="scoreVal">0</span></div>
 
     High Scores:
     <ul style="list-style: none; padding: 0;">
         <li th:each="entry: ${highscores}">
-            <span th:text="${entry.name}">Name</span>: <span th:text="${entry.score}">0</span>
+            <span th:text="${entry.name}">Name</span> | Score: <span th:text="${entry.score}">0</span> Time: <span
+                th:text="${entry.score}">0</span>
         </li>
     </ul>
-
-
-
 
 
     <div class="hint">Arrow Keys to Peck</div>
@@ -86,7 +84,7 @@
 
     const box = 20;
     let snake = [];
-    snake[0] = { x: 9 * box, y: 10 * box };
+    snake[0] = {x: 9 * box, y: 10 * box};
 
     let food = {
         x: Math.floor(Math.random() * 19 + 1) * box,
@@ -97,7 +95,6 @@
     let d; // Gerdrückter Key
 
     document.addEventListener("keydown", direction);
-
 
 
     function direction(event) {
@@ -124,7 +121,7 @@
         // Draw Food
         ctx.fillStyle = "#ffd700"; // Gold color
         ctx.beginPath();
-        ctx.arc(food.x + box/2, food.y + box/2, box/3, 0, 2 * Math.PI); // food
+        ctx.arc(food.x + box / 2, food.y + box / 2, box / 3, 0, 2 * Math.PI); // food
         ctx.fill();
 
         // Logic
@@ -147,13 +144,15 @@
             snake.pop();
         }
 
-        let newHead = { x: snakeX, y: snakeY };
+        let newHead = {x: snakeX, y: snakeY};
 
         if (snakeX < 0 || snakeX >= canvas.width || snakeY < 0 || snakeY >= canvas.height || collision(newHead, snake)) {
             clearInterval(game);
-            fetch('http://localhost:9090/score?newScore=' + score + "&name=" + playerName , { method: 'POST' }).then(() => {
+            let timeElapsed = Math.floor((Date.now() - startTime) / 1000);
+            fetch('http://localhost:9090/score?newScore=' + score + "&name=" + playerName + "&time=" + timeElapsed, {method: 'POST'}).then(() => {
                 setTimeout(() => {
                     alert("Game Over. Corn Eaten: " + score);
+                    alert(timeElapsed + "seconds")
                     location.reload();
                 }, 100);
             });

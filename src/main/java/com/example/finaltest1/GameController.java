@@ -1,25 +1,22 @@
 package com.example.finaltest1;
 
-import jakarta.persistence.Id;
-import org.hibernate.annotations.IdGeneratorType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.ui.Model;
 
 @Controller
 public class GameController {
-
 
     @Autowired
     private HighScoreRepository repository;
 
     @PostMapping("/score")
     @ResponseBody
-    public HighScore saveHighScore(@RequestParam int newScore,@RequestParam String name, @RequestParam int time) {
+    public HighScore saveHighScore(@RequestParam int newScore, @RequestParam String name, @RequestParam int time) {
 
         HighScore h = repository.findByName(name).orElse(new HighScore());
 
@@ -30,7 +27,7 @@ public class GameController {
             h.setScore(newScore);
             repository.save(h);
         }
-        return h;
+return h;
     }
 
     @GetMapping("/")
