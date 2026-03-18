@@ -25,5 +25,9 @@ public interface HighScoreRepository extends JpaRepository<HighScore, Long> {
         return findAll(Sort.unsorted()).stream().sorted(Comparator.comparing(HighScore::getScore).reversed().thenComparing(HighScore::getTime)).limit(6).toList();
     }
 
+    // ToDo Normale List
+    // ToDo Score zuerst
+    // Array Drin
 
+// ToDO sort Name, Score, Time - Neue Klasse. Ohne SortedList. Eigene List
 }

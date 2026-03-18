@@ -23,7 +23,7 @@ public class GameController {
         h.setName(name);
         h.setTime(time);
 
-        if (h.getName().equals(name) && newScore > h.getScore() || h.getTime() < time && h.getName().equals(name)) {
+        if (newScore > h.getScore() || h.getTime() < time ) {
             h.setScore(newScore);
             repository.save(h);
         }
