@@ -1,8 +1,12 @@
 HELP.md
 target/
-.mvn/wrapper/maven-wrapper.jar
+!.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
+
+# H2 Database files
+*.mv.db
+*.trace.db
 
 ### STS ###
 .apt_generated
@@ -31,3 +35,7 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
