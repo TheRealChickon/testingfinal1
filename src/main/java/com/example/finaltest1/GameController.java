@@ -19,24 +19,28 @@ public class GameController {
     @Autowired
     private HighScoreSorter highScoreSorter;
 
-    @PostMapping("/score")
-    @ResponseBody
-    public HighScore saveHighScore(@RequestParam int newScore,
-                                   @RequestParam String name,
-                                   @RequestParam int time) {
+@PostMapping("/score")
+@ResponseBody
+public HighScore saveHighScore(@RequestParam int newScore,
+                               @RequestParam String name,
+                               @RequestParam int time) {
 
-        HighScore h = repository.findByName(name).orElse(new HighScore());
+    // Holt den bestehenden Spieler oder erstellt einen neuen, falls der Name zum ersten Mal auftaucht
+    HighScore h = repository.findByName(name).orElse(new HighScore());
+    boolean isNewPlayer = (h.getName() == null);
+    boolean beatHighScore = (newScore > h.getScore());
+    boolean sameScoreButFaster = (newScore == h.getScore() && time < h.getTime());
 
+    // Speichert nur, wenn der Spieler komplett neu ist ODER den alten Score geknackt hat
+    if (h.getName() == null || newScore > h.getScore()) {
         h.setName(name);
-        h.setTime(time);
-
-        if (newScore > h.getScore() || h.getTime() < time) {
-            h.setScore(newScore);
-            repository.save(h);
-        }
-
-        return h;
+        h.setScore(newScore);
+        h.setTime(time); // Zeit wird mitgespeichert, filtert aber nicht
+        repository.save(h);
     }
+
+    return h;
+}
 
     @GetMapping("/")
     public String showGame(Model model) {
